@@ -27,7 +27,19 @@ def searchbook(request):
             aItem["url"]=bqgbook[0]
             aItem["bookname"] = bqgbook[1]
             jsonlist.append(aItem)
-    return PlainTextResponse(json.dumps(jsonlist, ensure_ascii=False))
+    return JSONResponse(jsonlist)
+
+
+@app.route('/getallbook')
+def getallbook(request):
+    bqkallbook = bqg.getallbook()
+    jsonlist = []
+    for bqgbook in bqkallbook:
+        aItem = {}
+        aItem["url"]=bqgbook[0]
+        aItem["bookname"] = bqgbook[1]
+        jsonlist.append(aItem)
+    return JSONResponse(jsonlist)
 
 
 @app.route('/bookmulu', methods=['POST'])
